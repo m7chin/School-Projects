@@ -1,0 +1,36 @@
+The extensions that we added are described below:
+
+1.) Multiple Waves: we implemented multiple waves (a total of 3)
+    by creating a new Wave object when all aliens in the current wave
+    are None. The alien waves got progressively faster. Doing so required changing
+    the initializer for the class Wave, which now has a parameter named speed. Also,
+    after each wave is complete, a GLabel was created in app.py and _text was set
+    equal to that GLabel. The text on the GLabel indicated which wave was just
+    completed, which wave is next (if there is another wave for the player to beat),
+    and that the 'S' key needs to be pressed to continue onto the next wave.
+
+2.) Implement Sound Effects: we implemented sound effects for game events. All of
+    our sound effects were taken from the audio files provided by the CS 1110
+    instructors in code.zip. Implementing sound effects required creating Sound
+    objects in this initializer for Wave. A new attribute, _mute, was also added to
+    Wave which indicates whether or not the sound effects should be played. Also,
+    an attribute _mpress was added in app.py which was used to mute and unmute the
+    sound by pressing the 'M' key. One limitation of our implementation of sound
+    effects is that it only plays one sound if two aliens fire simultaneously.
+
+3.) Dynamically Speed Up the Aliens: we implemented a feature where the aliens in
+    the alien wave speed up as you kill aliens. We did this by modifying our method
+    _detectCollisions in Wave. Every time an alien was killed, we used the method
+    setSpeed to multiply the current speed by a factor of 0.9875 and set the resulting
+    value to the attribute _speed of the alien wave.
+
+4.) Keep Track of Score: we implemented a feature that keeps track of the score and
+    displays the score on the screen. We did this by first adding a new attribute
+    _score to Wave which represents the player score in the current wave. We also added
+    a method to Wave called _updateScore, which is called in _detectCollisions,
+    which changes _score based on which row in the alien wave the alien that was killed lived,
+    and rewards the player with appropriate amount of points. We also created an attribute
+    _scoreslabel which is a GLabel that displays the current player score.
+    
+    We also added a label for the player lives, which displays how many lives the player currently
+    has. The number of player lives gets reset to SHIP_LIVES after each wave is complete.
